@@ -3,6 +3,8 @@ extends Node
 var BARRIER_ID := 1
 var INVISIBLE_BARRIER_ID := 2
 
+var _tracker := EntityTracker.new()
+
 onready var _ground := $GameWorld/GroundTile
 
 

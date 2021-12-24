@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Entity",
 "language": "GDScript",
 "path": "res://Entities/Entities/Entities.gd"
+}, {
+"base": "Reference",
+"class": "EntityTracker",
+"language": "GDScript",
+"path": "res://Systems/EntityTracker.gd"
 } ]
 _global_script_class_icons={
 "BlueprintEntity": "",
-"Entity": ""
+"Entity": "",
+"EntityTracker": ""
 }
 
 [application]
@@ -29,6 +35,10 @@ _global_script_class_icons={
 config/name="godot-2d-builder Starter"
 run/main_scene="res://Simulation.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Events="*res://Autoload/Events.gd"
 
 [display]
 
