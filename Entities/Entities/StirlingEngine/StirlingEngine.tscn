@@ -6,6 +6,7 @@
 [sub_resource type="Animation" id=1]
 resource_name = "work"
 length = 0.6
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("PistonFront:position")
 tracks/0/interp = 1
