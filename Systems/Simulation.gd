@@ -6,7 +6,7 @@ var INVISIBLE_BARRIER_ID := 2
 var _tracker := EntityTracker.new()
 
 onready var _ground := $GameWorld/GroundTile
-onready var _entity_place := $GameWorld/YSort/TileMap
+onready var _entity_place := $GameWorld/YSort/EntityPlacer
 onready var _player := $GameWorld/YSort/Player
 
 

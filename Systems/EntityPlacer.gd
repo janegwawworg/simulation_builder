@@ -2,11 +2,15 @@ extends TileMap
 
 var MAX_WORK_DISTANCE := 275.0
 var POSITION_OFFSET := Vector2(0, 25)
+var DESCONSTRUCT_TIME := 3.0
 
 var _blueprint: BlueprintEntity
 var _tracker: EntityTracker
 var _ground: TileMap
 var _player: KinematicBody2D
+var _current_desconstruct_position := Vector2.ZERO
+
+onready var _desconstruct_timer := $Timer
 
 onready var Libraby := {
 	"StirlingEngine": preload("res://Entities/Blueprints/StirlingEngineBlueprint.tscn")
@@ -29,22 +33,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		if has_placeable_blueprint:
 			if not cell_is_occpied and is_closer_to_player and is_on_ground:
 				_place_entity(cell)
-				
 	elif event is InputEventMouseMotion:
 		if has_placeable_blueprint:
 			_move_blueprint_in_world(cell)
-			
-			
+		if cell != _current_desconstruct_position:
+			_abort_descontruct()
 	elif event.is_action_pressed("drop") and _blueprint:
 		remove_child(_blueprint)
 		_blueprint = null
-		
 	elif event.is_action_pressed("quickbar_1"):
 		if _blueprint:
 			remove_child(_blueprint)
 		_blueprint = Libraby.StirlingEngine
 		add_child(_blueprint)
 		_move_blueprint_in_world(cell)
+	elif event.is_action_pressed("right_click") and not has_placeable_blueprint:
+		if cell_is_occpied and is_closer_to_player:
+			_descontruct(global_mouse_position, cell)
+	elif event is InputEventMouseButton:
+		_abort_descontruct()
 
 
 func _process(delta: float) -> void:
@@ -89,3 +96,20 @@ func _move_blueprint_in_world(cell: Vector2) -> void:
 		_blueprint.modulate = Color.white
 	else:
 		_blueprint.modulate = Color.red
+
+
+func _descontruct(mouse: Vector2, cell: Vector2) -> void:
+	_desconstruct_timer.connect("timeout", self, "_finish_descontruct", [cell], CONNECT_ONESHOT)
+	_desconstruct_timer.start(DESCONSTRUCT_TIME)
+	_current_desconstruct_position = cell
+
+
+func _finish_descontruct(cell: Vector2) -> void:
+	var entity := _tracker.get_entity(cell)
+	_tracker.entity_remove(cell)
+
+
+func _abort_descontruct() -> void:
+	if _desconstruct_timer.is_connected("timeout", self, "_finish_descontruct"):
+		_desconstruct_timer.disconnect("timeout", self, "_finish_descontruct")
+	_desconstruct_timer.stop()
