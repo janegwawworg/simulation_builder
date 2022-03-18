@@ -6,6 +6,7 @@ const BOOTBACK := 0.6
 onready var _animate_player := $AnimationPlayer
 onready var _tween := $Tween
 onready var _shaft := $PistonShaft
+onready var _power_source := $PowerSource
 
 
 func _ready() -> void:
@@ -15,4 +16,5 @@ func _ready() -> void:
 	_tween.interpolate_property(
 		_shaft, "modulate", Color.white, Color(0.5, 1, 0.5), BOOTUP
 	)
+	_tween.interpolate_property(_power_source, "efficiency", 0, 1, BOOTUP)
 	_tween.start()
