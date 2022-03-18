@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 34 ), Vector2( 0, 3 ), Vector2( 0, 34 ) ]
+"values": [ Vector2( 0, -6 ), Vector2( 0, -36 ), Vector2( 0, -6 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("PistonBack:position")
@@ -29,32 +29,33 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 4 ), Vector2( 0, -26 ), Vector2( 0, 4 ) ]
+"values": [ Vector2( 0, -36 ), Vector2( 0, -66 ), Vector2( 0, -36 ) ]
 }
 
-[node name="StirlingEngine" type="StaticBody2D"]
+[node name="StirlingEngine" type="StaticBody2D" groups=["power_sources"]]
+position = Vector2( 60, 120 )
 script = ExtResource( 2 )
 
 [node name="EngineBase" type="Sprite" parent="."]
-position = Vector2( 0, 32 )
+position = Vector2( 0, -6 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 449, 149, 102, 62 )
 
 [node name="PistonBack" type="Sprite" parent="."]
-position = Vector2( 0, 4 )
+position = Vector2( 0, -36 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 780, 139, 100, 27 )
 
 [node name="PistonShaft" type="Sprite" parent="."]
-position = Vector2( 0, 8 )
+position = Vector2( 0, -30 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 584, 119, 52, 70 )
 
 [node name="PistonFront" type="Sprite" parent="."]
-position = Vector2( 0, 34 )
+position = Vector2( 0, -6 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 669, 164, 102, 37 )
@@ -65,4 +66,5 @@ anims/work = SubResource( 1 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -38 )
 polygon = PoolVector2Array( 0, 62, 51, 37, 51, 26, 0, 0, -51, 27, -51, 38 )

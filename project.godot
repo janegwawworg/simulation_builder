@@ -12,9 +12,9 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "BlueprintEntity",
 "language": "GDScript",
-"path": "res://Entities/Blueprints/BluepintEntity.gd"
+"path": "res://Entities/Blueprints/BlueprintEntity.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://Entities/Entities/Entities.gd"
@@ -23,11 +23,35 @@ _global_script_classes=[ {
 "class": "EntityTracker",
 "language": "GDScript",
 "path": "res://Systems/EntityTracker.gd"
+}, {
+"base": "BlueprintEntity",
+"class": "StiringEngineBlueprint",
+"language": "GDScript",
+"path": "res://Entities/Blueprints/StirlingEngineBlueprint.gd"
+}, {
+"base": "Reference",
+"class": "Types",
+"language": "GDScript",
+"path": "res://Shared/Types.gd"
+}, {
+"base": "BlueprintEntity",
+"class": "WireBlueprint",
+"language": "GDScript",
+"path": "res://Entities/Blueprints/WireBlueprint.gd"
+}, {
+"base": "Entity",
+"class": "WireEntity",
+"language": "GDScript",
+"path": "res://Entities/Entities/WireEntity/WireEntity.gd"
 } ]
 _global_script_class_icons={
 "BlueprintEntity": "",
 "Entity": "",
-"EntityTracker": ""
+"EntityTracker": "",
+"StiringEngineBlueprint": "",
+"Types": "",
+"WireBlueprint": "",
+"WireEntity": ""
 }
 
 [application]

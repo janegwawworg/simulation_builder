@@ -7,9 +7,9 @@ var _entities := {}
 func entity_placed(entity, cell: Vector2) -> void:
 	if _entities.has(cell):
 		return
-		
+	
 	_entities[cell] = entity
-	emit_signal("entity_placed", entity, cell)
+	Events.emit_signal("entity_placed", entity, cell)
 	
 	
 func entity_remove(cell) -> void:
@@ -17,8 +17,8 @@ func entity_remove(cell) -> void:
 		return
 	
 	var entity = _entities[cell]
-	_entities.erase(cell)
-	emit_signal("entity_remove", entity, cell)
+	var _result := _entities.erase(cell)
+	Events.emit_signal("entity_remove", entity, cell)
 	entity.queue_free()
 	
 	
