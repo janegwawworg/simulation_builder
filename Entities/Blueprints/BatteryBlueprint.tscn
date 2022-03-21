@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Entities/Blueprints/PowerDirection.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shared/blueprints.svg" type="Texture" id=2]
+[ext_resource path="res://Entities/Blueprints/BlueprintEntity.gd" type="Script" id=3]
+
+[node name="BatteryBlueprint" type="Node2D"]
+position = Vector2( 200, 200 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 339, 119, 102, 82 )
+
+[node name="PowerDirection" parent="." instance=ExtResource( 1 )]
+position = Vector2( -1, 2 )
+output_directions = 4

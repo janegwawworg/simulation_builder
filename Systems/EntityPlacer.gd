@@ -16,6 +16,7 @@ onready var Libraby := {
 	"StirlingEngine": preload(
 		"res://Entities/Blueprints/StirlingEngineBlueprint.tscn").instance(),
 	"Wire": preload("res://Entities/Blueprints/WireBlueprint.tscn").instance(),
+	"Battery": preload("res://Entities/Blueprints/BatteryBlueprint.tscn").instance(),
 }
 
 
@@ -23,6 +24,7 @@ func _ready() -> void:
 	Libraby[Libraby.StirlingEngine] = preload(
 		"res://Entities/Entities/StirlingEngine/StirlingEngine.tscn")
 	Libraby[Libraby.Wire] = preload("res://Entities/Entities/WireEntity/WireEntity.tscn")
+	Libraby[Libraby.Battery] = preload("res://Entities/Entities/BatteryEntity/BatteryEntity.tscn")
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -60,6 +62,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		remove_child(_blueprint)
 		_blueprint = null
 		
+	elif event.is_action_pressed("rotate_blueprint") and _blueprint:
+		_blueprint.rotate_blueprint()
+		
 	elif event.is_action_pressed("quickbar_1"):
 		if _blueprint:
 			remove_child(_blueprint)
@@ -73,6 +78,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_blueprint = Libraby.Wire
 		add_child(_blueprint)
 		_move_blueprint_in_world(cell)
+		
+	elif event.is_action_pressed("quickbar_3"):
+		if _blueprint:
+			remove_child(_blueprint)
+		_blueprint = Libraby.Battery
+		add_child(_blueprint)
+		_move_blueprint_in_world(cell)
 
 
 func _process(delta: float) -> void:
@@ -84,6 +96,7 @@ func _process(delta: float) -> void:
 func _exit_tree() -> void:
 	Libraby.StirlingEngine.queue_free()
 	Libraby.Wire.queue_free()
+	Libraby.Battery.queue_free()
 	
 	
 func setup(

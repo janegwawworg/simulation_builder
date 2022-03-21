@@ -179,4 +179,3 @@ func _on_systems_ticked(delta: float) -> void:
 				break
 				
 		power_source.emit_signal("power_updated", power_draw, delta)
-		print(remaining_power)
