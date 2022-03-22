@@ -12,19 +12,6 @@ var _current_desconstruct_position := Vector2.ZERO
 var _flat_entities: Node2D
 
 onready var _desconstruct_timer := $Timer
-onready var Libraby := {
-	"StirlingEngine": preload(
-		"res://Entities/Blueprints/StirlingEngineBlueprint.tscn").instance(),
-	"Wire": preload("res://Entities/Blueprints/WireBlueprint.tscn").instance(),
-	"Battery": preload("res://Entities/Blueprints/BatteryBlueprint.tscn").instance(),
-}
-
-
-func _ready() -> void:
-	Libraby[Libraby.StirlingEngine] = preload(
-		"res://Entities/Entities/StirlingEngine/StirlingEngine.tscn")
-	Libraby[Libraby.Wire] = preload("res://Entities/Entities/WireEntity/WireEntity.tscn")
-	Libraby[Libraby.Battery] = preload("res://Entities/Entities/BatteryEntity/BatteryEntity.tscn")
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -67,22 +54,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	elif event.is_action_pressed("quickbar_1"):
 		if _blueprint:
-			remove_child(_blueprint)
-		_blueprint = Libraby.StirlingEngine
+			_blueprint.queue_free()
+		_blueprint = Library.blueprints.StirlingEngine.instance()
 		add_child(_blueprint)
 		_move_blueprint_in_world(cell)
 		
 	elif event.is_action_pressed("quickbar_2"):
 		if _blueprint:
-			remove_child(_blueprint)
-		_blueprint = Libraby.Wire
+			_blueprint.queue_free()
+		_blueprint = Library.blueprints.Wire.instance()
 		add_child(_blueprint)
 		_move_blueprint_in_world(cell)
 		
 	elif event.is_action_pressed("quickbar_3"):
 		if _blueprint:
-			remove_child(_blueprint)
-		_blueprint = Libraby.Battery
+			_blueprint.queue_free()
+		_blueprint = Library.blueprints.Battery.instance()
 		add_child(_blueprint)
 		_move_blueprint_in_world(cell)
 
@@ -91,12 +78,6 @@ func _process(delta: float) -> void:
 	var has_placeable_blueprint: bool = _blueprint and _blueprint.placeable
 	if has_placeable_blueprint:
 		_move_blueprint_in_world(world_to_map(get_global_mouse_position()))
-
-
-func _exit_tree() -> void:
-	Libraby.StirlingEngine.queue_free()
-	Libraby.Wire.queue_free()
-	Libraby.Battery.queue_free()
 	
 	
 func setup(
@@ -117,7 +98,8 @@ func setup(
 
 
 func _place_entity(cell: Vector2) -> void:
-	var new_entity: Node2D = Libraby[_blueprint].instance()
+	var entity_name := Library.get_entity_name_from(_blueprint)
+	var new_entity: Node2D = Library.entities[entity_name].instance()
 	
 	if _blueprint is WireBlueprint:
 		var direction := _get_powered_neighbors(cell)
