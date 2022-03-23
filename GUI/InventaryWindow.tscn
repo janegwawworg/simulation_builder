@@ -3,6 +3,7 @@
 [ext_resource path="res://GUI/InventaryBar.tscn" type="PackedScene" id=2]
 
 [node name="InventoryWindow" type="MarginContainer"]
+mouse_filter = 2
 custom_constants/margin_right = 25
 custom_constants/margin_top = 25
 custom_constants/margin_left = 25
@@ -13,12 +14,14 @@ margin_left = 25.0
 margin_top = 25.0
 margin_right = 79.0
 margin_bottom = 99.0
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 47.0
 margin_bottom = 67.0
+mouse_filter = 1
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -31,12 +34,12 @@ margin_right = 20.0
 margin_bottom = 40.0
 custom_constants/separation = 10
 
-[node name="Inventaries1" parent="PanelContainer/MarginContainer/Inventaries" instance=ExtResource( 2 )]
+[node name="InventaryBar" parent="PanelContainer/MarginContainer/Inventaries" instance=ExtResource( 2 )]
 
-[node name="Inventaries2" parent="PanelContainer/MarginContainer/Inventaries" instance=ExtResource( 2 )]
+[node name="InventaryBar2" parent="PanelContainer/MarginContainer/Inventaries" instance=ExtResource( 2 )]
 margin_top = 10.0
 margin_bottom = 10.0
 
-[node name="Inventaries3" parent="PanelContainer/MarginContainer/Inventaries" instance=ExtResource( 2 )]
+[node name="InventaryBar3" parent="PanelContainer/MarginContainer/Inventaries" instance=ExtResource( 2 )]
 margin_top = 20.0
 margin_bottom = 20.0

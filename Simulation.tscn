@@ -39,6 +39,5 @@ position = Vector2( 962, 539 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="CenterContainer" parent="CanvasLayer" instance=ExtResource( 4 )]
-visible = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
