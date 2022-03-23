@@ -2,6 +2,9 @@ extends Node
 class_name BlueprintEntity
 
 export var placeable := true
+export var stack_size := 1
+
+var stack_count := 1
 
 onready var power_direction := find_node("PowerDirection")
 
