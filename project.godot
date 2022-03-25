@@ -100,6 +100,10 @@ Library="*res://Autoload/Library.gd"
 window/size/width=1920
 window/size/height=1080
 
+[game_gui]
+
+inventory_size=75.0
+
 [input]
 
 left={

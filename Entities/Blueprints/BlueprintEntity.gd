@@ -29,3 +29,21 @@ func rotate_blueprint() -> void:
 		new_directions |= Types.Direction.LEFT
 		
 	power_direction.output_directions = new_directions
+
+
+func display_as_inventory_icon() -> void:
+	var panel_size: float = ProjectSettings.get_setting("game_gui/inventory_size")
+	
+	self.position = Vector2(panel_size * 0.5, panel_size * 0.75)
+	self.scale = Vector2(panel_size / 100, panel_size / 100)
+	self.modulate = Color.white
+	
+	if power_direction:
+		power_direction.hide()
+		
+		
+func display_as_world_entity() -> void:
+	self.scale = Vector2.ONE
+	self.position = Vector2.ZERO
+	if power_direction:
+		power_direction.show()

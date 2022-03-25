@@ -4,12 +4,12 @@ var MAX_WORK_DISTANCE := 275.0
 var POSITION_OFFSET := Vector2(0, 25)
 var DESCONSTRUCT_TIME := 0.3
 
-var _blueprint: BlueprintEntity
 var _tracker: EntityTracker
 var _ground: TileMap
 var _player: KinematicBody2D
 var _current_desconstruct_position := Vector2.ZERO
 var _flat_entities: Node2D
+var _gui: Control
 
 onready var _desconstruct_timer := $Timer
 	
@@ -17,7 +17,7 @@ onready var _desconstruct_timer := $Timer
 func _unhandled_input(event: InputEvent) -> void:
 	var global_mouse_pos := get_global_mouse_position()
 	
-	var has_placeable_blueprint: bool = _blueprint and _blueprint.placeable
+	var has_placeable_blueprint: bool = _gui.blueprint and _gui.blueprint.placeable
 	var is_closer_to_player := (
 		global_mouse_pos.distance_to(_player.global_position) 
 		< MAX_WORK_DISTANCE)
@@ -45,47 +45,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		if cell != _current_desconstruct_position:
 			_abort_descontruct()
 			
-	elif event.is_action_pressed("drop") and _blueprint:
-		remove_child(_blueprint)
-		_blueprint = null
+	elif event.is_action_pressed("drop") and _gui.blueprint:
+		remove_child(_gui.blueprint)
+		_gui.blueprint = null
 		
-	elif event.is_action_pressed("rotate_blueprint") and _blueprint:
-		_blueprint.rotate_blueprint()
-		
-	elif event.is_action_pressed("quickbar_1"):
-		if _blueprint:
-			_blueprint.queue_free()
-		_blueprint = Library.blueprints.StirlingEngine.instance()
-		add_child(_blueprint)
-		_move_blueprint_in_world(cell)
-		
-	elif event.is_action_pressed("quickbar_2"):
-		if _blueprint:
-			_blueprint.queue_free()
-		_blueprint = Library.blueprints.Wire.instance()
-		add_child(_blueprint)
-		_move_blueprint_in_world(cell)
-		
-	elif event.is_action_pressed("quickbar_3"):
-		if _blueprint:
-			_blueprint.queue_free()
-		_blueprint = Library.blueprints.Battery.instance()
-		add_child(_blueprint)
-		_move_blueprint_in_world(cell)
+	elif event.is_action_pressed("rotate_blueprint") and _gui.blueprint:
+		_gui.blueprint.rotate_blueprint()
 
 
 func _process(delta: float) -> void:
-	var has_placeable_blueprint: bool = _blueprint and _blueprint.placeable
-	if has_placeable_blueprint:
+	var has_placeable_blueprint: bool = _gui.blueprint and _gui.blueprint.placeable
+	if has_placeable_blueprint and not _gui.mouse_in_gui:
 		_move_blueprint_in_world(world_to_map(get_global_mouse_position()))
 	
 	
 func setup(
+	gui: Control,
 	tracker: EntityTracker, 
 	ground: TileMap, 
 	flat_entities: YSort, 
 	player: KinematicBody2D
 ) -> void:
+	_gui = gui
 	_tracker = tracker
 	_ground = ground
 	_player = player
@@ -98,10 +79,10 @@ func setup(
 
 
 func _place_entity(cell: Vector2) -> void:
-	var entity_name := Library.get_entity_name_from(_blueprint)
+	var entity_name := Library.get_entity_name_from(_gui.blueprint)
 	var new_entity: Node2D = Library.entities[entity_name].instance()
 	
-	if _blueprint is WireBlueprint:
+	if _gui.blueprint is WireBlueprint:
 		var direction := _get_powered_neighbors(cell)
 		_flat_entities.add_child(new_entity)
 		WireBlueprint.set_sprite_for_direction(new_entity.sprite, direction)
@@ -109,12 +90,20 @@ func _place_entity(cell: Vector2) -> void:
 		add_child(new_entity)
 		
 	new_entity.global_position = map_to_world(cell) + POSITION_OFFSET
-	new_entity.setup(_blueprint)
+	new_entity.setup(_gui.blueprint)
 	_tracker.entity_placed(new_entity, cell)
+	
+	if _gui.blueprint.stack_count == 1:
+		_gui.destory_blueprint()
+	else:
+		_gui.blueprint.stack_count -= 1
+		_gui.update_label()
 
 
 func _move_blueprint_in_world(cell: Vector2) -> void:
-	_blueprint.global_position = map_to_world(cell) + POSITION_OFFSET
+	_gui.blueprint.display_as_world_entity()
+	_gui.blueprint.global_position = get_viewport_transform().xform(
+		map_to_world(cell) + POSITION_OFFSET)
 	
 	var is_closer_to_player := (
 		get_global_mouse_position().distance_to(_player.global_position) 
@@ -123,12 +112,12 @@ func _move_blueprint_in_world(cell: Vector2) -> void:
 	var is_cell_occupied := _tracker.is_cell_occupied(cell)
 	
 	if not is_cell_occupied and is_closer_to_player and is_on_ground:
-		_blueprint.modulate = Color.white
+		_gui.blueprint.modulate = Color.white
 	else:
-		_blueprint.modulate = Color.red
+		_gui.blueprint.modulate = Color.red
 		
-	if _blueprint is WireBlueprint:
-		WireBlueprint.set_sprite_for_direction(_blueprint.sprite,
+	if _gui.blueprint is WireBlueprint:
+		WireBlueprint.set_sprite_for_direction(_gui.blueprint.sprite,
 _get_powered_neighbors(cell))
 
 

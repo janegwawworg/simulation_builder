@@ -8,9 +8,15 @@ onready var count_label := $Label
 func _ready() -> void:
 	set_as_toplevel(true)
 	
+	var panel_size: float = ProjectSettings.get_setting("game_gui/inventory_size")
+	rect_min_size = Vector2(panel_size, panel_size)
+	rect_size = rect_min_size
+	
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		if blueprint:
+			blueprint.display_as_inventory_icon()
 		rect_global_position = event.global_position
 		
 		

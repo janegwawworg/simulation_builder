@@ -5,7 +5,6 @@
 [ext_resource path="res://Entities/Blueprints/BlueprintEntity.gd" type="Script" id=3]
 
 [node name="BatteryBlueprint" type="Node2D"]
-position = Vector2( 200, 200 )
 script = ExtResource( 3 )
 stack_size = 8
 

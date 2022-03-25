@@ -9,6 +9,13 @@ var gui: Control
 onready var count_label := $Label
 
 
+func _ready() -> void:
+	var panel_size: float = ProjectSettings.get_setting("game_gui/inventory_size")
+	
+	rect_min_size = Vector2(panel_size, panel_size)
+	rect_size = rect_min_size
+
+
 func setup(_gui: Control) -> void:
 	gui = _gui
 
@@ -22,6 +29,7 @@ func _set_held_item(value: BlueprintEntity) -> void:
 	if is_instance_valid(held_item):
 		add_child(held_item)
 		move_child(held_item, 0)
+		held_item.display_as_inventory_icon()
 	
 	_update_label()
 	emit_signal("held_item_changed", self, held_item)
