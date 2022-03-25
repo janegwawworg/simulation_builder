@@ -23,3 +23,8 @@ func setup(_gui: Control) -> void:
 		
 func _on_InventoryBar_inventory_changed(panel, held_item) -> void:
 	emit_signal("inventory_changed", panel, held_item)
+
+
+func claim_quickbar(quickbar: Control) -> void:
+	quickbar.get_parent().remove_child(quickbar)
+	inventory_path.add_child(quickbar)
