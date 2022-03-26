@@ -27,6 +27,7 @@ onready var _quickbar_container := $MarginContainer
 func _ready() -> void:
 	player_inventory.setup(self)
 	_quickbar.setup(self)
+	Events.connect("entered_picked_area", self, "_on_Player_entered_pickup_area")
 	
 	
 func _process(delta: float) -> void:
@@ -88,3 +89,39 @@ func _get_blueprint() -> BlueprintEntity:
 func _claim_quickbar() -> void:
 	_quickbar.get_parent().remove_child(_quickbar)
 	_quickbar_container.add_child(_quickbar)
+
+
+func find_panels_with(item_id: String) -> Array:
+	var existing_stacks: Array = (
+		_quickbar.find_panels_with(item_id) +
+		player_inventory.find_panels_with(item_id)
+	)
+	
+	return existing_stacks
+
+
+func add_to_inventory(item: BlueprintEntity) -> bool:
+	if item.get_parent() != null:
+		item.get_parent().remove_child(item)
+		
+	if _quickbar.add_to_first_available_inventory(item):
+		return true
+		
+	return player_inventory.add_to_first_available_inventory(item)
+	
+	
+func _on_Player_entered_pickup_area(item: GroundItem, player: KinematicBody2D) -> void:
+	if not (item and item.blueprint):
+		return
+		
+	var amount := item.blueprint.stack_count
+	
+	if add_to_inventory(item.blueprint):
+		item.do_pickup(player)
+	else:
+		if item.blueprint.stack_count < amount:
+			var new_item := item.duplicate()
+			
+			item.get_parent().call_deferred("add_child", new_item)
+			new_item.call_deferred("setup", item.blueprint)
+			new_item.call_deferred("do_pickup", player)

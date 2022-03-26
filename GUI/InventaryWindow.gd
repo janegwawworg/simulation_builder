@@ -28,3 +28,19 @@ func _on_InventoryBar_inventory_changed(panel, held_item) -> void:
 func claim_quickbar(quickbar: Control) -> void:
 	quickbar.get_parent().remove_child(quickbar)
 	inventory_path.add_child(quickbar)
+
+
+func find_panels_with(item_id: String) -> Array:
+	var output := []
+	for inventory in inventories:
+		output += inventory.find_panels_with(item_id)
+		
+	return output
+
+
+func add_to_first_available_inventory(item: BlueprintEntity) -> bool:
+	for inventory in inventories:
+		if inventory.add_to_first_available_inventory(item):
+			return true
+			
+	return false
