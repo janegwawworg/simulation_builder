@@ -10,6 +10,7 @@ var _player: KinematicBody2D
 var _current_desconstruct_position := Vector2.ZERO
 var _flat_entities: Node2D
 var _gui: Control
+var GroundItemScene := preload("res://Entities/GroundItem.tscn")
 
 onready var _desconstruct_timer := $Timer
 	
@@ -46,8 +47,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_abort_descontruct()
 			
 	elif event.is_action_pressed("drop") and _gui.blueprint:
-		remove_child(_gui.blueprint)
-		_gui.blueprint = null
+		if is_on_ground:
+			_drop_entity(_gui.blueprint, global_mouse_pos)
+			_gui.blueprint = null
 		
 	elif event.is_action_pressed("rotate_blueprint") and _gui.blueprint:
 		_gui.blueprint.rotate_blueprint()
@@ -131,6 +133,13 @@ func _descontruct(mouse: Vector2, cell: Vector2) -> void:
 
 func _finish_descontruct(cell: Vector2) -> void:
 	var entity := _tracker.get_entity(cell)
+	
+	var entity_name := Library.get_entity_name_from(entity)
+	var location := map_to_world(cell)
+	if Library.blueprints.has(entity_name):
+		var Blueprint: PackedScene = Library.blueprints[entity_name]
+		_drop_entity(Blueprint.instance(), location)
+	
 	_tracker.entity_remove(cell)
 	_update_neighboring_flat_entities(cell)
 
@@ -166,3 +175,9 @@ func _update_neighboring_flat_entities(cell: Vector2) -> void:
 		if object and object is WireEntity:
 			var tile_directions := _get_powered_neighbors(key)
 			WireBlueprint.set_sprite_for_direction(object.sprite, tile_directions)
+
+
+func _drop_entity(entity: BlueprintEntity, location: Vector2) -> void:
+	var ground_item := GroundItemScene.instance()
+	add_child(ground_item)
+	ground_item.setup(entity, location)
