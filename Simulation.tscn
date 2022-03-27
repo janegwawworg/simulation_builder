@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Shared/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Systems/Simulation.gd" type="Script" id=3]
 [ext_resource path="res://GUI/GUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Systems/EntityPlacer.gd" type="Script" id=5]
+[ext_resource path="res://Entities/Entities/BatteryEntity/BatteryEntity.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entities/Entities/StoneEntity/StoneEntity.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Entities/Entities/BranchesEntity/BranchesEntity.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Entities/Entities/StirlingEngineEntity/StirlingEngineEntity.tscn" type="PackedScene" id=9]
 
 [node name="Simulation" type="Node"]
 script = ExtResource( 3 )
@@ -31,6 +35,33 @@ script = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="GameWorld/YSort/EntityPlacer"]
 
+[node name="BatteryEntity" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 6 )]
+position = Vector2( 550, 450 )
+
+[node name="BatteryEntity2" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 6 )]
+position = Vector2( 699, 375 )
+
+[node name="BatteryEntity3" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 6 )]
+position = Vector2( 852, 300 )
+
+[node name="StoneEntity" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 7 )]
+position = Vector2( 702, 522 )
+
+[node name="StoneEntity2" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 7 )]
+position = Vector2( 636, 546 )
+
+[node name="BranchesEntity" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 8 )]
+position = Vector2( 1173, 402 )
+
+[node name="BranchesEntity2" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 8 )]
+position = Vector2( 1030, 333 )
+
+[node name="StirlingEngine" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 9 )]
+position = Vector2( 842, 446 )
+
+[node name="StirlingEngine2" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 9 )]
+position = Vector2( 951, 401 )
+
 [node name="Player" parent="GameWorld/YSort" instance=ExtResource( 2 )]
 position = Vector2( 962, 539 )
 
@@ -39,5 +70,13 @@ position = Vector2( 962, 539 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 6.0
+margin_top = -2.0
+margin_right = 6.0
+margin_bottom = -2.0
+debug_items = {
+"Battery": 4,
+"StirlingEngine": 4
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

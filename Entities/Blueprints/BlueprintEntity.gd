@@ -2,7 +2,7 @@ extends Node
 class_name BlueprintEntity
 
 export var placeable := true
-export var stack_size := 1
+export var stack_size := 100
 
 var stack_count := 1
 

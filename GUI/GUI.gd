@@ -13,6 +13,8 @@ const QUICKBAR_ACTIONS := [
 	"quickbar_0"
 ]
 
+export var debug_items := {}
+
 var blueprint: BlueprintEntity setget _set_blueprint, _get_blueprint
 var mouse_in_gui := false
 
@@ -28,6 +30,16 @@ func _ready() -> void:
 	player_inventory.setup(self)
 	_quickbar.setup(self)
 	Events.connect("entered_picked_area", self, "_on_Player_entered_pickup_area")
+	
+	for item in debug_items.keys():
+		if not Library.blueprints.has(item):
+			continue
+			
+		var item_instance: Node = Library.blueprints[item].instance()
+		item_instance.stack_count = min(item_instance.stack_size, debug_items[item])
+		
+		if not add_to_inventory(item_instance):
+			item_instance.queue_free()
 	
 	
 func _process(delta: float) -> void:
