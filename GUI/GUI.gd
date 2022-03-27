@@ -113,7 +113,7 @@ func find_panels_with(item_id: String) -> Array:
 
 
 func add_to_inventory(item: BlueprintEntity) -> bool:
-	if item.get_parent() != null:
+	if item && item.get_parent() != null:
 		item.get_parent().remove_child(item)
 		
 	if _quickbar.add_to_first_available_inventory(item):
@@ -126,7 +126,9 @@ func _on_Player_entered_pickup_area(item: GroundItem, player: KinematicBody2D) -
 	if not (item and item.blueprint):
 		return
 		
-	var amount := item.blueprint.stack_count
+	var amount := 1
+	if is_instance_valid(item.blueprint):
+		amount = item.blueprint.stack_count
 	
 	if add_to_inventory(item.blueprint):
 		item.do_pickup(player)
