@@ -5,6 +5,7 @@
 
 [node name="BranchesBlueprint" type="Node2D"]
 script = ExtResource( 1 )
+description = "Branches"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -25 )

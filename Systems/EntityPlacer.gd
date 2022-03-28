@@ -43,6 +43,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion:
 		if has_placeable_blueprint:
 			_move_blueprint_in_world(cell)
+		else:
+			_update_hover(cell)
+			
 		if cell != _current_desconstruct_position:
 			_abort_descontruct()
 			
@@ -59,7 +62,26 @@ func _process(delta: float) -> void:
 	var has_placeable_blueprint: bool = _gui.blueprint and _gui.blueprint.placeable
 	if has_placeable_blueprint and not _gui.mouse_in_gui:
 		_move_blueprint_in_world(world_to_map(get_global_mouse_position()))
+
+
+func _update_hover(cell: Vector2) -> void:
+	var is_closer_to_player := (
+		get_global_mouse_position().distance_to(_player.global_position) 
+		< MAX_WORK_DISTANCE)
+	if _tracker.is_cell_occupied(cell) and is_closer_to_player:
+		_hover_entity(cell)
+	else:
+		_clear_hover_entity(cell)
+		
+		
+func _hover_entity(cell: Vector2) -> void:
+	var entity: Node2D = _tracker.get_entity(cell)
+	Events.emit_signal("hover_over_entity", entity)
 	
+	
+func _clear_hover_entity(cell: Vector2) -> void:
+	Events.emit_signal("hover_over_entity", null)
+
 	
 func setup(
 	gui: Control,

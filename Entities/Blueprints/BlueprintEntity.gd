@@ -3,6 +3,7 @@ class_name BlueprintEntity
 
 export var placeable := true
 export var stack_size := 100
+export (String, MULTILINE) var description := ""
 
 var stack_count := 1
 

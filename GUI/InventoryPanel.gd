@@ -50,43 +50,46 @@ func _gui_input(event: InputEvent) -> void:
 	var left_click := event.is_action_pressed("left_click")
 	var right_click := event.is_action_pressed("right_click")
 	
-	if not (left_click or right_click):
-		return
-		
-	if gui.blueprint:
-		var blueprint_name := Library.get_entity_name_from(gui.blueprint)
-		
-		if is_instance_valid(held_item):
-			var held_item_name := Library.get_entity_name_from(held_item)
-			var item_is_same_type: bool = held_item_name == blueprint_name
+	if left_click or right_click:
+		if gui.blueprint:
+			var blueprint_name := Library.get_entity_name_from(gui.blueprint)
+			if is_instance_valid(held_item):
+				var held_item_name := Library.get_entity_name_from(held_item)
+				var item_is_same_type: bool = held_item_name == blueprint_name
 			
-			var stack_has_space: bool = held_item.stack_count < held_item.stack_size
-			if item_is_same_type and stack_has_space:
-				if left_click:
-					_stack_items()
-				elif right_click:
-					_stack_items(true)
-			else:
-				if left_click:
-					_swap_items()
-		else:
-			if left_click:
-				_grab_item()
-				
-			elif right_click:
-				if gui.blueprint.stack_count > 1:
-					_grab_split_items()
+				var stack_has_space: bool = held_item.stack_count < held_item.stack_size
+				if item_is_same_type and stack_has_space:
+					if left_click:
+						_stack_items()
+					elif right_click:
+						_stack_items(true)
 				else:
-					_grab_item()
-	elif is_instance_valid(held_item):
-		if left_click:
-			_release_item()
-			
-		elif right_click:
-			if held_item.stack_count == 1:
-				_release_item()
+					if left_click:
+						_swap_items()
 			else:
-				_split_items()
+				if left_click:
+					_grab_item()
+				
+				elif right_click:
+					if gui.blueprint.stack_count > 1:
+						_grab_split_items()
+					else:
+						_grab_item()
+		elif is_instance_valid(held_item):
+			if left_click:
+				_release_item()
+			
+			elif right_click:
+				if held_item.stack_count == 1:
+					_release_item()
+				else:
+					_split_items()
+					
+	elif event is InputEventMouseMotion:
+		if is_instance_valid(held_item):
+			Events.emit_signal("hover_over_entity", held_item)
+		else:
+			Events.emit_signal("hover_over_entity", null)
 				
 	
 func _stack_items(split := false) -> void:

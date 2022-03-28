@@ -6,6 +6,7 @@
 
 [node name="BatteryBlueprint" type="Node2D"]
 script = ExtResource( 3 )
+description = "Battery"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -24 )

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Shared/Theme/builder_theme.tres" type="Theme" id=1]
 [ext_resource path="res://GUI/InventaryWindow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/DragPreview.tscn" type="PackedScene" id=3]
 [ext_resource path="res://GUI/GUI.gd" type="Script" id=4]
 [ext_resource path="res://GUI/QuickBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://GUI/InfoGUI.tscn" type="PackedScene" id=6]
 
 [node name="GUI" type="CenterContainer"]
 anchor_right = 1.0
@@ -12,6 +13,8 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 4 )
+debug_items = {
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 960.0
@@ -39,3 +42,9 @@ custom_constants/margin_top = 900
 margin_top = 900.0
 margin_right = 0.0
 margin_bottom = 900.0
+
+[node name="InfoGUI" parent="." instance=ExtResource( 6 )]
+margin_left = 934.0
+margin_top = 521.0
+margin_right = 985.0
+margin_bottom = 559.0

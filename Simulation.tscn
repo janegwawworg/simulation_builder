@@ -70,12 +70,13 @@ position = Vector2( 962, 539 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 4 )]
-margin_left = 6.0
+margin_left = 2.0
 margin_top = -2.0
-margin_right = 6.0
+margin_right = -2.0
 margin_bottom = -2.0
 debug_items = {
 "Battery": 4,
+"Ingot": 5,
 "StirlingEngine": 4
 }
 

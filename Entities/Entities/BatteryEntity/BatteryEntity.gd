@@ -45,3 +45,7 @@ func _on_PowerSource_power_updated(power_draw, delta):
 
 func _on_PowerReceiver_received_power(amount, delta):
 	self.stored_power = stored_power + amount * delta
+
+
+func get_info() -> String:
+	return "Storing %-4.1f/%s j" % [stored_power, max_storage]
