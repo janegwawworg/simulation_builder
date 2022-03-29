@@ -54,3 +54,6 @@ margin_left = 934.0
 margin_top = 521.0
 margin_right = 985.0
 margin_bottom = 559.0
+
+[connection signal="inventory_changed" from="HBoxContainer/InventoryWindow" to="." method="_on_InventoryWindow_inventory_changed"]
+[connection signal="inventory_changed" from="MarginContainer/QuickBar" to="." method="_on_InventoryWindow_inventory_changed"]

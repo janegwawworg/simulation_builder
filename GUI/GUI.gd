@@ -155,3 +155,7 @@ func _on_Player_entered_pickup_area(item: GroundItem, player: KinematicBody2D) -
 			item.get_parent().call_deferred("add_child", new_item)
 			new_item.call_deferred("setup", item.blueprint)
 			new_item.call_deferred("do_pickup", player)
+
+
+func _on_InventoryWindow_inventory_changed(panel, held_item) -> void:
+	_crafting_window.update_recipes()

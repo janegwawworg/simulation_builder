@@ -76,7 +76,7 @@ margin_right = -2.0
 margin_bottom = -2.0
 debug_items = {
 "Battery": 4,
-"Ingot": 5,
+"Ingot": 10,
 "StirlingEngine": 4
 }
 
