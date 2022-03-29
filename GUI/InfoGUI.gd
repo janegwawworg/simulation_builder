@@ -12,6 +12,7 @@ func _ready() -> void:
 	
 	Events.connect("hover_over_entity", self, "_on_hover_over_entity")
 	Events.connect("info_updated", self, "_on_info_updated")
+	Events.connect("hover_over_recipe", self, "_on_hovered_over_recipe")
 	hide()
 	
 	
@@ -51,3 +52,18 @@ func _set_info(entity: Node) -> void:
 				
 	_label.text = output
 	show()
+
+
+func _on_hovered_over_recipe(output: String, recipe: Dictionary) -> void:
+	var blueprint: BlueprintEntity = Library.blueprints[output].instance()
+	_set_info(blueprint)
+	
+	blueprint.free()
+	
+	_label.text = "%sx %s" % [recipe.amount, _label.text]
+	
+	var inputs: Dictionary = recipe.inputs
+	for input in inputs.keys():
+		_label.text += "\n   %sx %s" % [inputs[input], input.capitalize()]
+		
+	set_deferred("rect_size", Vector2.ZERO)

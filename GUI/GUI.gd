@@ -24,11 +24,13 @@ onready var is_open: bool = $HBoxContainer/InventoryWindow.visible
 onready var _gui_rect := $HBoxContainer
 onready var _quickbar := $MarginContainer/QuickBar
 onready var _quickbar_container := $MarginContainer
+onready var _crafting_window := $HBoxContainer/CraftingGUI
 
 
 func _ready() -> void:
 	player_inventory.setup(self)
 	_quickbar.setup(self)
+	_crafting_window.setup(self)
 	Events.connect("entered_picked_area", self, "_on_Player_entered_pickup_area")
 	
 	for item in debug_items.keys():
@@ -72,12 +74,15 @@ func _close_inventories() -> void:
 	is_open = false
 	player_inventory.visible = false
 	_claim_quickbar()
+	_crafting_window.visible = false
 	
 	
 func _open_inventories() -> void:
 	is_open = true
 	player_inventory.visible = true
 	player_inventory.claim_quickbar(_quickbar)
+	_crafting_window.visible = true
+	_crafting_window.update_recipes()
 	
 	
 func destory_blueprint() -> void:
@@ -110,6 +115,17 @@ func find_panels_with(item_id: String) -> Array:
 	)
 	
 	return existing_stacks
+
+
+func is_in_inventory(item_id: String, amount: int) -> bool:
+	var existing_stacks := find_panels_with(item_id)
+	if existing_stacks.empty():
+		return false
+	
+	var total := 0
+	for stack in existing_stacks:
+		total += stack.held_item.stack_count
+	return total >= amount
 
 
 func add_to_inventory(item: BlueprintEntity) -> bool:

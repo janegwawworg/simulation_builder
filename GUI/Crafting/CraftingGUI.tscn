@@ -1,24 +1,30 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GUI/Crafting/CraftingGUI.gd" type="Script" id=1]
 
 [node name="CraftingGUI" type="MarginContainer"]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 custom_constants/margin_right = 25
 custom_constants/margin_top = 25
 custom_constants/margin_left = 25
 custom_constants/margin_bottom = 25
+script = ExtResource( 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 79.0
 margin_bottom = 79.0
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 47.0
 margin_bottom = 47.0
+mouse_filter = 2
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -29,6 +35,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 20.0
 margin_bottom = 20.0
+mouse_filter = 2
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer"]

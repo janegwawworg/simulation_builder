@@ -9,6 +9,7 @@ placeable = false
 description = "Smelted ore."
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 119, 229, 102, 62 )

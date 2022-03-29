@@ -11,3 +11,5 @@ signal entered_picked_area(entity, player)
 signal hover_over_entity(entity)
 
 signal info_updated(entity)
+
+signal hover_over_recipe(output, recipe)

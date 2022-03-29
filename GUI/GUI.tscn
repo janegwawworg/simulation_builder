@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Shared/Theme/builder_theme.tres" type="Theme" id=1]
 [ext_resource path="res://GUI/InventaryWindow.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://GUI/GUI.gd" type="Script" id=4]
 [ext_resource path="res://GUI/QuickBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://GUI/InfoGUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GUI/Crafting/CraftingGUI.tscn" type="PackedScene" id=7]
 
 [node name="GUI" type="CenterContainer"]
 anchor_right = 1.0
@@ -22,6 +23,11 @@ margin_top = 540.0
 margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2
+
+[node name="CraftingGUI" parent="HBoxContainer" instance=ExtResource( 7 )]
+visible = false
+margin_right = 90.0
+margin_bottom = 90.0
 
 [node name="InventoryWindow" parent="HBoxContainer" instance=ExtResource( 2 )]
 visible = false

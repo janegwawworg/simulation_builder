@@ -9,6 +9,7 @@ stack_size = 8
 description = "StirlingEngine"
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 889, 119, 102, 92 )
