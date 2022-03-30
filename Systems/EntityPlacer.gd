@@ -146,9 +146,28 @@ _get_powered_neighbors(cell))
 
 
 func _descontruct(mouse: Vector2, cell: Vector2) -> void:
+	var blueprint: BlueprintEntity = _gui.blueprint
+	var blueprint_name := ""
+	
+	if blueprint and blueprint is ToolEntity:
+		blueprint_name = blueprint.tool_name
+	elif blueprint:
+		blueprint_name = Library.get_entity_name_from(blueprint)
+		
+	var entity := _tracker.get_entity(cell)
+	
+	if (
+		not entity.deconstruct_filter.empty()
+		and (not blueprint or not blueprint_name in entity.deconstruct_filter)
+	):
+		return
+		
+	
 	_desconstruct_timer.connect(
 		"timeout", self, "_finish_descontruct", [cell], CONNECT_ONESHOT)
 		
+	var modifier := 1.0 if not blueprint is ToolEntity else 1.0 / blueprint.tool_speed
+	
 	_desconstruct_timer.start(DESCONSTRUCT_TIME)
 	_current_desconstruct_position = cell
 
@@ -158,9 +177,12 @@ func _finish_descontruct(cell: Vector2) -> void:
 	
 	var entity_name := Library.get_entity_name_from(entity)
 	var location := map_to_world(cell)
+	
 	if Library.blueprints.has(entity_name):
 		var Blueprint: PackedScene = Library.blueprints[entity_name]
-		_drop_entity(Blueprint.instance(), location)
+		
+		for _i in entity.pickup_count:
+			_drop_entity(Blueprint.instance(), location)
 	
 	_tracker.entity_remove(cell)
 	_update_neighboring_flat_entities(cell)

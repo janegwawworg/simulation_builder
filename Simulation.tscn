@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Shared/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Entities/Entities/StoneEntity/StoneEntity.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Entities/Entities/BranchesEntity/BranchesEntity.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Entities/Entities/StirlingEngineEntity/StirlingEngineEntity.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Entities/Entities/BoulderEntity/BoulderEntity.tscn" type="PackedScene" id=10]
 
 [node name="Simulation" type="Node"]
 script = ExtResource( 3 )
@@ -62,6 +63,12 @@ position = Vector2( 842, 446 )
 [node name="StirlingEngine2" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 9 )]
 position = Vector2( 951, 401 )
 
+[node name="BoulderEntity" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 10 )]
+position = Vector2( 1050, 453 )
+
+[node name="BoulderEntity2" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 10 )]
+position = Vector2( 1139, 497 )
+
 [node name="Player" parent="GameWorld/YSort" instance=ExtResource( 2 )]
 position = Vector2( 962, 539 )
 
@@ -75,8 +82,12 @@ margin_top = -2.0
 margin_right = -2.0
 margin_bottom = -2.0
 debug_items = {
+"Axe": 5,
 "Battery": 4,
+"CrudeAxe": 9,
+"CrudePickaxe": 11,
 "Ingot": 10,
+"Pickaxe": 8,
 "StirlingEngine": 4
 }
 
