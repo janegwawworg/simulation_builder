@@ -8,6 +8,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+placeable = false
 description = "Enable the decontruction of large lumber structures like trees."
 tool_name = "Axe"
 

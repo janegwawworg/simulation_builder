@@ -25,6 +25,7 @@ onready var _gui_rect := $HBoxContainer
 onready var _quickbar := $MarginContainer/QuickBar
 onready var _quickbar_container := $MarginContainer
 onready var _crafting_window := $HBoxContainer/CraftingGUI
+onready var _deconstruct_bar := $DeconstructProgress
 
 
 func _ready() -> void:

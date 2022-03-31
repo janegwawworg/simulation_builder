@@ -1,16 +1,15 @@
 extends Entity
-class_name BoulderEntity
 
 const REGIONS := [
-	Rect2(10, 780, 100, 100),
-	Rect2(120, 780, 100, 100),
-	Rect2(230, 780, 100, 100)
+	Rect2(340, 780, 100, 100),
+	Rect2(450, 780, 100, 100),
 ]
 
 
 func _ready() -> void:
 	var index := randi() % REGIONS.size()
 	$Sprite.region_rect = REGIONS[index]
+	
 	var collision: CollisionPolygon2D = get_child(index + 1)
 	collision.disabled = false
 	collision.show()
@@ -19,4 +18,4 @@ func _ready() -> void:
 
 
 func get_entity_name() -> String:
-	return "Stone"
+	return "Ore"

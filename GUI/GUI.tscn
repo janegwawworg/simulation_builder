@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Shared/Theme/builder_theme.tres" type="Theme" id=1]
 [ext_resource path="res://GUI/InventaryWindow.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://GUI/QuickBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://GUI/InfoGUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://GUI/Crafting/CraftingGUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://GUI/DeconstructProgress.tscn" type="PackedScene" id=8]
 
 [node name="GUI" type="CenterContainer"]
 anchor_right = 1.0
@@ -54,6 +55,8 @@ margin_left = 934.0
 margin_top = 521.0
 margin_right = 985.0
 margin_bottom = 559.0
+
+[node name="DeconstructProgress" parent="." instance=ExtResource( 8 )]
 
 [connection signal="inventory_changed" from="HBoxContainer/InventoryWindow" to="." method="_on_InventoryWindow_inventory_changed"]
 [connection signal="inventory_changed" from="MarginContainer/QuickBar" to="." method="_on_InventoryWindow_inventory_changed"]

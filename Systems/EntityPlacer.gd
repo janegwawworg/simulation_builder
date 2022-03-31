@@ -13,6 +13,7 @@ var _gui: Control
 var GroundItemScene := preload("res://Entities/GroundItem.tscn")
 
 onready var _desconstruct_timer := $Timer
+onready var _deconstruct_tween := $Tween
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -167,8 +168,19 @@ func _descontruct(mouse: Vector2, cell: Vector2) -> void:
 		"timeout", self, "_finish_descontruct", [cell], CONNECT_ONESHOT)
 		
 	var modifier := 1.0 if not blueprint is ToolEntity else 1.0 / blueprint.tool_speed
+	var deconstruct_bar: TextureProgress= _gui._deconstruct_bar
 	
-	_desconstruct_timer.start(DESCONSTRUCT_TIME)
+	deconstruct_bar.rect_global_position = (
+		get_viewport_transform().xform(mouse) +
+		POSITION_OFFSET
+	)
+	deconstruct_bar.show()
+	_deconstruct_tween.interpolate_property(
+		deconstruct_bar, "value", 0, 100, DESCONSTRUCT_TIME * modifier
+	)
+	_deconstruct_tween.start()
+	
+	_desconstruct_timer.start(DESCONSTRUCT_TIME * modifier)
 	_current_desconstruct_position = cell
 
 
@@ -186,12 +198,14 @@ func _finish_descontruct(cell: Vector2) -> void:
 	
 	_tracker.entity_remove(cell)
 	_update_neighboring_flat_entities(cell)
+	_gui._deconstruct_bar.hide()
 
 
 func _abort_descontruct() -> void:
 	if _desconstruct_timer.is_connected("timeout", self, "_finish_descontruct"):
 		_desconstruct_timer.disconnect("timeout", self, "_finish_descontruct")
 	_desconstruct_timer.stop()
+	_gui._deconstruct_bar.hide()
 
 func _get_powered_neighbors(cell: Vector2) -> int:
 	var direction := 0
