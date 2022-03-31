@@ -13,3 +13,4 @@ const NEIGHBORS := {
 const POWER_MOVERS := "power_movers"
 const POWER_RECEIVERS := "power_receivers"
 const POWER_SOURCES := "power_sources"
+const GUI_ENTITIES := "gui_entities"

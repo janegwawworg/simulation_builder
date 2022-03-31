@@ -17,6 +17,7 @@ export var debug_items := {}
 
 var blueprint: BlueprintEntity setget _set_blueprint, _get_blueprint
 var mouse_in_gui := false
+var _open_gui: Control
 
 onready var player_inventory := $HBoxContainer/InventoryWindow
 onready var _drag_preview := $DragPreview
@@ -76,14 +77,19 @@ func _close_inventories() -> void:
 	player_inventory.visible = false
 	_claim_quickbar()
 	_crafting_window.visible = false
+	if _open_gui:
+		player_inventory.inventory_path.remove_child(_open_gui)
+		_open_gui = null
 	
 	
-func _open_inventories() -> void:
+func _open_inventories(open_crafting := true) -> void:
 	is_open = true
 	player_inventory.visible = true
 	player_inventory.claim_quickbar(_quickbar)
-	_crafting_window.visible = true
-	_crafting_window.update_recipes()
+	
+	if open_crafting:
+		_crafting_window.visible = true
+		_crafting_window.update_recipes()
 	
 	
 func destory_blueprint() -> void:
@@ -160,3 +166,26 @@ func _on_Player_entered_pickup_area(item: GroundItem, player: KinematicBody2D) -
 
 func _on_InventoryWindow_inventory_changed(panel, held_item) -> void:
 	_crafting_window.update_recipes()
+
+	
+func get_gui_component_from(entity: Node) -> GUIComponent:
+	for child in entity.get_children():
+		if child is GUIComponent:
+			return child
+	return null
+	
+	
+func open_entity_gui(entity: Entity) -> void:
+	var component := get_gui_component_from(entity)
+	if not component:
+		return
+
+	if is_open:
+		_close_inventories()
+
+	_open_gui = component.gui
+	if not _open_gui.get_parent() == player_inventory.inventory_path:
+		player_inventory.inventory_path.add_child(_open_gui)
+		player_inventory.inventory_path.move_child(_open_gui, 0)
+	_open_gui.setup(self)
+	_open_inventories(false)
