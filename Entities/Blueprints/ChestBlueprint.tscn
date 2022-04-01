@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Entities/Blueprints/ChestBlueprint.gd" type="Script" id=1]
+[ext_resource path="res://Shared/blueprints.svg" type="Texture" id=2]
+
+[node name="ChestBlueprint" type="Node2D"]
+script = ExtResource( 1 )
+stack_size = 2
+description = "Store items in its inventory."
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -25 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 29, 229, 62, 52 )

@@ -201,6 +201,15 @@ func _finish_descontruct(cell: Vector2) -> void:
 		for _i in entity.pickup_count:
 			_drop_entity(Blueprint.instance(), location)
 	
+	if entity.is_in_group(Types.GUI_ENTITIES):
+		var inventories: Array = _gui.find_inventory_bars_in(_gui.get_gui_component_from(entity))
+		
+		var inventory_items := []
+		for inventory in inventories:
+			inventory_items += inventory.get_inventory()
+		for item in inventory_items:
+			_drop_entity(item, location)
+	
 	_tracker.entity_remove(cell)
 	_update_neighboring_flat_entities(cell)
 	_gui._deconstruct_bar.hide()
@@ -241,6 +250,8 @@ func _update_neighboring_flat_entities(cell: Vector2) -> void:
 
 
 func _drop_entity(entity: BlueprintEntity, location: Vector2) -> void:
+	if entity.get_parent():
+		entity.get_parent().remove_child(entity)
 	var ground_item := GroundItemScene.instance()
 	add_child(ground_item)
 	ground_item.setup(entity, location)

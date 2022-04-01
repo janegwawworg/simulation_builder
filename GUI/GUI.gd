@@ -189,3 +189,16 @@ func open_entity_gui(entity: Entity) -> void:
 		player_inventory.inventory_path.move_child(_open_gui, 0)
 	_open_gui.setup(self)
 	_open_inventories(false)
+
+
+func find_inventory_bars_in(component: GUIComponent) -> Array:
+	var output := []
+	var parent_stack := [component.gui]
+	
+	while not parent_stack.empty():
+		var current: Node = parent_stack.pop_back()
+		if current is InventoryBar:
+			output.push_back(current)
+		parent_stack += current.get_children()
+		
+	return output

@@ -7,9 +7,13 @@ export var slot_count := 10
 signal inventory_changed(panel, held_item)
 
 var panels := []
+var setup := false
 
 
 func setup(gui: Control) -> void:
+	if setup:
+		return
+	setup = true
 	for panel in panels:
 		panel.setup(gui)
 		panel.connect("held_item_changed", self, "_on_Panel_held_item_changed")
@@ -64,3 +68,11 @@ func add_to_first_available_inventory(item: BlueprintEntity) -> bool:
 			return true
 			
 	return false
+
+
+func get_inventory() -> Array:
+	var output := []
+	for panel in panels:
+		if is_instance_valid(panel.held_item):
+			output.push_back(panel.held_item)
+	return output

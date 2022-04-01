@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GUI/InventaryBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Entities/Entities/ChestGUI/ChestGUI.gd" type="Script" id=2]
+
+[node name="ChestGUI" type="MarginContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 35.0
+
+[node name="InventaryBar" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 30.0
+slot_count = 5
+
+[node name="InventaryBar2" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 4.0
+margin_right = 30.0
+margin_bottom = 4.0
+slot_count = 5
+
+[node name="InventaryBar3" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 8.0
+margin_right = 30.0
+margin_bottom = 8.0
+slot_count = 5
