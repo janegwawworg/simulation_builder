@@ -54,3 +54,13 @@ func _find_entities_in(path: String) -> void:
 					"%s/%s" % [directory.get_current_dir(), filename]
 				)
 		filename = directory.get_next()
+
+
+func is_valid_filter(filter_list: Array, item_name: String) -> bool:
+	if filter_list.empty() or item_name in filter_list:
+		return true
+		
+	if filter_list.has("Fuels") and Recipes.Fuels.has(item_name):
+		return true
+		
+	return false

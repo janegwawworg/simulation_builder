@@ -5,6 +5,7 @@ signal held_item_changed(panel, item)
 
 var held_item: BlueprintEntity setget _set_held_item
 var gui: Control
+var _filter_list := []
 
 onready var count_label := $Label
 
@@ -16,8 +17,9 @@ func _ready() -> void:
 	rect_size = rect_min_size
 
 
-func setup(_gui: Control) -> void:
+func setup(_gui: Control, filter_list := []) -> void:
 	gui = _gui
+	_filter_list = filter_list
 
 
 func _set_held_item(value: BlueprintEntity) -> void:
@@ -64,13 +66,13 @@ func _gui_input(event: InputEvent) -> void:
 					elif right_click:
 						_stack_items(true)
 				else:
-					if left_click:
+					if left_click and Library.is_valid_filter(_filter_list, blueprint_name):
 						_swap_items()
 			else:
-				if left_click:
+				if left_click and Library.is_valid_filter(_filter_list, blueprint_name):
 					_grab_item()
 				
-				elif right_click:
+				elif right_click and Library.is_valid_filter(_filter_list, blueprint_name):
 					if gui.blueprint.stack_count > 1:
 						_grab_split_items()
 					else:
