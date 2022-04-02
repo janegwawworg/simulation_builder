@@ -36,11 +36,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			if not cell_is_occpied and is_closer_to_player and is_on_ground:
 				_place_entity(cell)
 				_update_neighboring_flat_entities(cell)
-			elif cell_is_occpied and is_closer_to_player:
-				var entity := _tracker.get_entity(cell)
-				if entity and entity.is_in_group(Types.GUI_ENTITIES):
-					_gui.open_entity_gui(entity)
-					_clear_hover_entity(cell)
+		elif cell_is_occpied and is_closer_to_player:
+			var entity := _tracker.get_entity(cell)
+			if entity and entity.is_in_group(Types.GUI_ENTITIES):
+				_gui.open_entity_gui(entity)
+				_clear_hover_entity(cell)
 		
 	elif event.is_action_pressed("right_click") and not has_placeable_blueprint:
 		if cell_is_occpied and is_closer_to_player:

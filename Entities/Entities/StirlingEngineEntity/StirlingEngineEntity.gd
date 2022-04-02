@@ -57,7 +57,7 @@ func _consume_fuel(amount: float) -> void:
 			gui.gui.fuel.queue_free()
 			gui.gui.fuel = null
 		else:
-			gui.gui.update_lables()
+			gui.gui.update_labels()
 	else:
 		_setup_work()
 	gui.gui.set_fuel((available_fuel / last_max_fuel) if last_max_fuel > 0.0 else 0.0)
