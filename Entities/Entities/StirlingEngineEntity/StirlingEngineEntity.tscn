@@ -1,10 +1,38 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Systems/Power/PowerSource.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Entities/StirlingEngineEntity/StirlingEngineEntity.gd" type="Script" id=2]
 [ext_resource path="res://Shared/tileset.svg" type="Texture" id=3]
 [ext_resource path="res://GUI/GUIComponent.gd" type="Script" id=4]
 [ext_resource path="res://Entities/Entities/StirlingEngineEntity/StirlingEngineGUI.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=2]
+resource_name = "shutdown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("PistonBack:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -36 ), Vector2( 0, -66 ), Vector2( 0, -36 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PistonFront:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -6 ), Vector2( 0, -36 ), Vector2( 0, -6 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "work"
@@ -68,6 +96,7 @@ region_enabled = true
 region_rect = Rect2( 669, 164, 102, 37 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/shutdown = SubResource( 2 )
 anims/work = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
@@ -79,3 +108,6 @@ polygon = PoolVector2Array( 0, 62, 51, 37, 51, 26, 0, 0, -51, 27, -51, 38 )
 [node name="PowerSource" type="Node" parent="."]
 script = ExtResource( 1 )
 power_amount = 25.0
+
+[connection signal="gui_status_changed" from="GUIComponent" to="." method="_on_GUIComponent_gui_status_changed"]
+[connection signal="power_updated" from="PowerSource" to="." method="_on_PowerSource_power_updated"]
