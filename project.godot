@@ -108,6 +108,16 @@ _global_script_classes=[ {
 "class": "WireEntity",
 "language": "GDScript",
 "path": "res://Entities/Entities/WireEntity/WireEntity.gd"
+}, {
+"base": "Node",
+"class": "WorkComponent",
+"language": "GDScript",
+"path": "res://Systems/Work/WorkComponent.gd"
+}, {
+"base": "Reference",
+"class": "WorkSystem",
+"language": "GDScript",
+"path": "res://Systems/Work/WorkSystem.gd"
 } ]
 _global_script_class_icons={
 "BaseMachineGUI": "",
@@ -129,7 +139,9 @@ _global_script_class_icons={
 "ToolEntity": "",
 "Types": "",
 "WireBlueprint": "",
-"WireEntity": ""
+"WireEntity": "",
+"WorkComponent": "",
+"WorkSystem": ""
 }
 
 [application]

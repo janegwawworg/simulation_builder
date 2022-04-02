@@ -13,6 +13,7 @@ onready var _player := $GameWorld/YSort/Player
 onready var _flat_entities := $GameWorld/FlatEntities
 onready var _power_system := PowerSystem.new()
 onready var _gui := $CanvasLayer/GUI
+onready var _work_system := WorkSystem.new()
 
 
 func _ready() -> void:
