@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://GUI/InventaryBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GUI/InventaryBar.gd" type="Script" id=2]
+[ext_resource path="res://GUI/InventoryPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Shared/symbols.svg" type="Texture" id=4]
+[ext_resource path="res://GUI/Crafting/GUISprite.gd" type="Script" id=5]
+[ext_resource path="res://Entities/Entities/Furnace/FurnaceGUI.gd" type="Script" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float fill_amount: hint_range(0, 1.0) = 0.0;
+
+void fragment()
+{
+	vec4 color = MODULATE;
+	float pixel_fill = step(1.0 - fill_amount, UV.y);
+	COLOR = clamp(color + (color * pixel_fill), 0, 1);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/fill_amount = 0.0
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float fill_amount: hint_range(0, 1.0) = 0.0;
+uniform vec2 region_position;
+uniform vec2 region_size;
+
+void fragment()
+{
+	vec4 color = texture(TEXTURE, UV);
+	vec2 texture_size = vec2(textureSize(TEXTURE, 0));
+	vec2 region_end = region_position + region_size;
+	float pixel_fill = step(UV.x * texture_size.x, fill_amount * region_end.x);
+	
+	COLOR = clamp(color + (color * pixel_fill), 0, 1);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/fill_amount = 0.0
+shader_param/region_position = Vector2( 10, 10 )
+shader_param/region_size = Vector2( 50, 50 )
+
+[node name="FurnaceGUI" type="MarginContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+script = ExtResource( 6 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 74.0
+margin_bottom = 55.0
+custom_constants/separation = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 9.0
+margin_bottom = 50.0
+
+[node name="InputInventaryBar" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_left = 9.0
+margin_right = 9.0
+size_flags_horizontal = 8
+slot_count = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 9.0
+margin_bottom = 4.0
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+modulate = Color( 0.188235, 0.462745, 1, 1 )
+material = SubResource( 2 )
+margin_right = 5.0
+rect_min_size = Vector2( 5, 0 )
+size_flags_vertical = 3
+
+[node name="FuelInventaryBar" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 9.0
+margin_right = 9.0
+custom_constants/separation = 10
+script = ExtResource( 2 )
+InventoryPanelScene = ExtResource( 3 )
+slot_count = 1
+item_filters = "Fuels"
+
+[node name="GUISprite" type="Control" parent="HBoxContainer"]
+material = SubResource( 4 )
+margin_left = 14.0
+margin_right = 64.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 4
+script = ExtResource( 5 )
+texture = ExtResource( 4 )
+region_enable = true
+region_rect = Rect2( 10, 10, 50, 50 )
+
+[node name="OutputInventaryBar" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 69.0
+margin_top = 25.0
+margin_right = 69.0
+margin_bottom = 25.0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+slot_count = 1
+item_filters = "NIL"
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="inventory_changed" from="HBoxContainer/VBoxContainer/InputInventaryBar" to="." method="_on_InputInventaryBar_inventory_changed"]
+[connection signal="inventory_changed" from="HBoxContainer/VBoxContainer/HBoxContainer/FuelInventaryBar" to="." method="_on_FuelInventaryBar_inventory_changed"]

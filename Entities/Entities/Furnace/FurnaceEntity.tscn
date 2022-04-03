@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Shared/tileset.svg" type="Texture" id=1]
+[ext_resource path="res://Entities/Entities/Entities.gd" type="Script" id=2]
+[ext_resource path="res://GUI/GUIComponent.gd" type="Script" id=3]
+[ext_resource path="res://Entities/Entities/Furnace/FurnaceGUI.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.718182, 0.868182 )
@@ -76,8 +79,13 @@ tracks/1/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[node name="FurnaceEntity" type="StaticBody2D"]
+[node name="FurnaceEntity" type="StaticBody2D" groups=["gui_entities"]]
 position = Vector2( 100, 100 )
+script = ExtResource( 2 )
+
+[node name="GUIComponent" type="Node" parent="."]
+script = ExtResource( 3 )
+GuiWindow = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -25 )

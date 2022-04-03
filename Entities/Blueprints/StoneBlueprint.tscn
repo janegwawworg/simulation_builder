@@ -8,6 +8,7 @@ script = ExtResource( 1 )
 placeable = false
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -20 )
 scale = Vector2( 0.998903, 0.949353 )
 texture = ExtResource( 2 )
 region_enabled = true
