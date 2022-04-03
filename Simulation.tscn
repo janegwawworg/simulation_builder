@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Shared/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Entities/Entities/TreeEntity/TreeEntity.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Entities/Entities/OreBoulderEntity/OreBoulderEntity.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Entities/Entities/ChestEntity/ChestEntity.tscn" type="PackedScene" id=13]
+[ext_resource path="res://default_env.tres" type="Environment" id=14]
 
 [node name="Simulation" type="Node"]
 script = ExtResource( 3 )
@@ -106,9 +107,13 @@ debug_items = {
 "Battery": 4,
 "CrudeAxe": 9,
 "CrudePickaxe": 11,
+"Furnace": 6,
 "Ingot": 10,
 "Pickaxe": 8,
 "StirlingEngine": 4
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 14 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
