@@ -1,15 +1,17 @@
 extends BaseMachineGUI
+class_name FurnaceGUI
 
 var input: BlueprintEntity
 var fuel: BlueprintEntity
 var output_panel: Panel
 
-onready var input_container := $HBoxContainer/VBoxContainer/InputInventaryBar
-onready var fuel_container := $HBoxContainer/VBoxContainer/HBoxContainer/FuelInventaryBar
+var input_container: InventoryBar
+var fuel_container: InventoryBar
+var fuel_bar: ColorRect
+
 onready var output_panel_container := $HBoxContainer/OutputInventaryBar
 onready var tween :=$Tween
 onready var arrow := $HBoxContainer/GUISprite
-onready var fuel_bar := $HBoxContainer/VBoxContainer/HBoxContainer/ColorRect
 
 
 func _ready() -> void:
@@ -17,13 +19,20 @@ func _ready() -> void:
 		ProjectSettings.get_setting("game_gui/inventory_size") / arrow.region_rect.size.x
 	)
 	arrow.scale = Vector2(scale, scale)
+	
+	_find_nodes()
 
+
+func _find_nodes() -> void:
+	input_container = $HBoxContainer/VBoxContainer/InputInventaryBar
+	fuel_container = $HBoxContainer/VBoxContainer/HBoxContainer/FuelInventaryBar
+	fuel_bar = $HBoxContainer/VBoxContainer/HBoxContainer/ColorRect
 
 func work(time: float) -> void:
 	if not is_inside_tree():
 		return
-	
-	tween.interpolate_property(self, "_advance_work_time", 0, 1, time)
+
+	tween.interpolate_method(self, "_advance_work_time", 0, 1, time)
 	tween.start()
 
 
@@ -34,7 +43,8 @@ func abort() -> void:
 
 
 func set_fuel(amount: float) -> void:
-	fuel_bar.material.set_shader_param("fill_amount", amount)
+	if fuel_bar:
+		fuel_bar.material.set_shader_param("fill_amount", amount)
 
 
 func seek(time: float) -> void:

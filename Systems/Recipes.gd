@@ -14,3 +14,8 @@ const Crafting := {
 }
 
 const Fuels := {Lumber = 50.0, Branches = 10.0}
+
+const Smelting := {
+	Ingot = {inputs = {"Ore": 1}, amount = 1, time = 5.0},
+	Coal = {inputs = {"Lumber": 1}, amount = 2, time = 3.0},
+}

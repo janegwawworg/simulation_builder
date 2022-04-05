@@ -107,7 +107,8 @@ debug_items = {
 "Battery": 4,
 "CrudeAxe": 9,
 "CrudePickaxe": 11,
-"Furnace": 4,
+"ElectricFurnace": 4,
+"Furnace": 8,
 "Ingot": 10,
 "Pickaxe": 8,
 "StirlingEngine": 4
