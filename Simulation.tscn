@@ -83,6 +83,24 @@ position = Vector2( 1402, 526 )
 [node name="TreeEntity3" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 11 )]
 position = Vector2( 1502, 574 )
 
+[node name="TreeEntity4" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 11 )]
+position = Vector2( 348, -553 )
+
+[node name="TreeEntity5" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 11 )]
+position = Vector2( 53, -549 )
+
+[node name="TreeEntity6" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 11 )]
+position = Vector2( -254, -552 )
+
+[node name="TreeEntity7" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 11 )]
+position = Vector2( 199, -624 )
+
+[node name="TreeEntity8" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 11 )]
+position = Vector2( -96, -629 )
+
+[node name="TreeEntity9" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 11 )]
+position = Vector2( 50, -653 )
+
 [node name="OreBoulderEntity" parent="GameWorld/YSort/EntityPlacer" instance=ExtResource( 12 )]
 position = Vector2( 1246, 553 )
 
