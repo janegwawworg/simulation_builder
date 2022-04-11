@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://GUI/TouchControl/Sprite-0003.png" type="Texture" id=1]
+[ext_resource path="res://GUI/TouchControl/Sprite-0002.png" type="Texture" id=2]
+[ext_resource path="res://GUI/TouchControl/Sprite-0001.png" type="Texture" id=3]
+[ext_resource path="res://GUI/TouchControl/destory.png" type="Texture" id=4]
+[ext_resource path="res://GUI/TouchControl/left.png" type="Texture" id=5]
+[ext_resource path="res://GUI/TouchControl/down1.png" type="Texture" id=6]
+[ext_resource path="res://GUI/TouchControl/up.png" type="Texture" id=7]
+[ext_resource path="res://GUI/TouchControl/right.png" type="Texture" id=8]
+
+[node name="MobileControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="LeftButton" type="TouchScreenButton" parent="."]
+position = Vector2( 136, 808 )
+normal = ExtResource( 5 )
+passby_press = true
+action = "left"
+visibility_mode = 1
+
+[node name="RightButton" type="TouchScreenButton" parent="."]
+position = Vector2( 312, 808 )
+normal = ExtResource( 8 )
+passby_press = true
+action = "right"
+visibility_mode = 1
+
+[node name="UpButton" type="TouchScreenButton" parent="."]
+position = Vector2( 224, 712 )
+normal = ExtResource( 7 )
+passby_press = true
+action = "up"
+visibility_mode = 1
+
+[node name="DownButton" type="TouchScreenButton" parent="."]
+position = Vector2( 224, 888 )
+normal = ExtResource( 6 )
+passby_press = true
+action = "down"
+visibility_mode = 1
+
+[node name="SelectButton" type="TouchScreenButton" parent="."]
+position = Vector2( 1600, 720 )
+normal = ExtResource( 3 )
+passby_press = true
+action = "left_click"
+visibility_mode = 1
+
+[node name="DropButton" type="TouchScreenButton" parent="."]
+position = Vector2( 1344, 896 )
+normal = ExtResource( 1 )
+passby_press = true
+action = "drop"
+visibility_mode = 1
+
+[node name="MenuButton" type="TouchScreenButton" parent="."]
+position = Vector2( 1344, 720 )
+normal = ExtResource( 2 )
+passby_press = true
+action = "toggle_inventory"
+visibility_mode = 1
+
+[node name="DestructButton" type="TouchScreenButton" parent="."]
+position = Vector2( 1600, 896 )
+normal = ExtResource( 4 )
+passby_press = true
+action = "right_click"
+visibility_mode = 1
