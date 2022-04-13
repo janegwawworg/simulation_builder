@@ -17,6 +17,7 @@ onready var _flat_entities := $FlatEntities
 onready var _gui := $"../../CanvasLayer/GUI"
 
 func _ready():
+	add_to_group("persist")
 	_entity_place.setup(_gui, _tracker, _ground, _flat_entities, _player)
 	var barriers: Array = _ground.get_used_cells_by_id(BARRIER_ID)
 	for cell in barriers:

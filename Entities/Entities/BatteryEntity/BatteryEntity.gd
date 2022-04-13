@@ -10,6 +10,7 @@ onready var indicator := $Indicator
 
 
 func _ready() -> void:
+	add_to_group("persist")
 	if source.output_direction != 15:
 		receiver.input_direction = 15 ^ source.output_direction
 		

@@ -62,8 +62,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			if InputMap.event_is_action(event, QUICKBAR_ACTIONS[i]) and event.is_pressed():
 				_simulate_input(_quickbar.panels[i])
 				break
-				
-				
+	if event.is_action_pressed("quit"):
+		Library.save_game()
+		get_tree().change_scene("res://GUI/Menu/StartMenu.tscn")
+
+
 func _simulate_input(panel: InventoryPanel) -> void:
 	var input := InputEventMouseButton.new()
 	input.button_index = BUTTON_LEFT

@@ -9,7 +9,7 @@ radius = 13.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 100.0
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=["persist"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

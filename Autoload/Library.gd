@@ -64,3 +64,11 @@ func is_valid_filter(filter_list: Array, item_name: String) -> bool:
 		return true
 		
 	return false
+
+
+func save_game() -> void:
+	pass
+
+
+func load_game() -> void:
+	pass

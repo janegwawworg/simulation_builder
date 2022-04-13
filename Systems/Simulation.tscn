@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://default_env.tres" type="Environment" id=1]
+[ext_resource path="res://Systems/Simulation.gd" type="Script" id=2]
+[ext_resource path="res://GUI/GUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GUI/TouchControl/MobileControl.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Level/Level1.tscn" type="PackedScene" id=5]
+
+[node name="Simulation" type="Node"]
+script = ExtResource( 2 )
+
+[node name="GameWorld" type="Node2D" parent="."]
+
+[node name="Level1" parent="GameWorld" instance=ExtResource( 5 )]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 3 )]
+margin_left = 2.0
+margin_top = -2.0
+margin_right = -2.0
+margin_bottom = -2.0
+debug_items = {
+"Axe": 5,
+"Battery": 10,
+"CrudeAxe": 9,
+"CrudePickaxe": 11,
+"ElectricFurnace": 4,
+"Furnace": 8,
+"Ingot": 10,
+"Pickaxe": 8,
+"StirlingEngine": 8
+}
+
+[node name="MobileControl" parent="CanvasLayer" instance=ExtResource( 4 )]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

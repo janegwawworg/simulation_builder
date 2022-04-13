@@ -11,6 +11,7 @@ onready var power_direction := find_node("PowerDirection")
 
 
 func rotate_blueprint() -> void:
+	add_to_group("persist")
 	if not power_direction:
 		return
 		
