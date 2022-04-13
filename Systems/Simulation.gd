@@ -12,6 +12,7 @@ onready var _level := $GameWorld/Level1
 
 func _ready() -> void:
 	$Timer.start(simulation_speed)
+	call_deferred("_next_level", "level2")
 
 
 # includes "level1" to "level8"
@@ -20,8 +21,9 @@ func _next_level(value: String) -> void:
 		return
 	var level_address: String = "res://Level/Level%s.tscn" % Levels[value]
 	
-	_level.queue_free()
-	_level = load(level_address).instance()
+	_level.free()
+	var level_scene = ResourceLoader.load(level_address)
+	_level = level_scene.instance()
 	_game_world.add_child(_level)
 
 
