@@ -12,7 +12,7 @@ onready var _level := $GameWorld/Level1
 
 func _ready() -> void:
 	$Timer.start(simulation_speed)
-	call_deferred("_next_level", "level2")
+	call_deferred("_next_level", "level1")
 
 
 # includes "level1" to "level8"

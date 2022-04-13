@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Level/ParallaxBackground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shared/Theme/builder_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Level/background2-export.png" type="Texture" id=3]
+[ext_resource path="res://Shared/Theme/Font/BagnardSans_font.tres" type="DynamicFont" id=4]
+
+[node name="StartMenu" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+custom_constants/margin_right = 100
+custom_constants/margin_top = 100
+custom_constants/margin_left = 100
+custom_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 1820.0
+margin_bottom = 980.0
+custom_constants/separation = 50
+
+[node name="TextureRect" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 1720.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 7
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 4 )
+text = "Simulation-2d"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_left = 786.0
+margin_top = 632.0
+margin_right = 934.0
+margin_bottom = 880.0
+size_flags_horizontal = 6
+size_flags_vertical = 10
+custom_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 148.0
+margin_bottom = 248.0
+custom_constants/separation = 20
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 47.0
+text = "Start"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 67.0
+margin_right = 148.0
+margin_bottom = 114.0
+text = "Continue"
+
+[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 134.0
+margin_right = 148.0
+margin_bottom = 181.0
+text = "Levels"
+
+[node name="Button4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 201.0
+margin_right = 148.0
+margin_bottom = 248.0
+text = "Quit"
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 1 )]
+follow_viewport_enable = true
+follow_viewport_scale = 2.0
+background = ExtResource( 3 )

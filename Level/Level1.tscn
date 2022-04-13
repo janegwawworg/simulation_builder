@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Level/ParallaxBackground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Level/blue_background.png" type="Texture" id=2]
 [ext_resource path="res://Systems/EntityPlacer.gd" type="Script" id=3]
 [ext_resource path="res://Shared/Tileset.tres" type="TileSet" id=6]
 [ext_resource path="res://Level/Level.gd" type="Script" id=9]
@@ -272,3 +273,5 @@ position = Vector2( 7049, 1252 )
 position = Vector2( 962, 539 )
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 1 )]
+background = ExtResource( 2 )
+position = Vector2( -1652, -1040 )
