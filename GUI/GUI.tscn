@@ -51,10 +51,10 @@ margin_right = 0.0
 margin_bottom = 900.0
 
 [node name="InfoGUI" parent="." instance=ExtResource( 6 )]
-margin_left = 934.0
-margin_top = 521.0
-margin_right = 985.0
-margin_bottom = 559.0
+margin_left = 923.0
+margin_top = 514.0
+margin_right = 996.0
+margin_bottom = 565.0
 
 [node name="DeconstructProgress" parent="." instance=ExtResource( 8 )]
 visible = false
