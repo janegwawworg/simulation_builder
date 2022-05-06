@@ -7,6 +7,8 @@ const ENTITY := "Entity.tscn"
 
 var entities := {}
 var blueprints := {}
+enum Levels {level1 = 1, level2, level3, level4}
+var current_level := "level1"
 
 
 func _ready() -> void:

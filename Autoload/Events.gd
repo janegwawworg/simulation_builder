@@ -13,3 +13,5 @@ signal hover_over_entity(entity)
 signal info_updated(entity)
 
 signal hover_over_recipe(output, recipe)
+
+signal to_next_level(level)

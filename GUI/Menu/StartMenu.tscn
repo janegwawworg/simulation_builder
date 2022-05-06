@@ -40,40 +40,40 @@ valign = 1
 uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_left = 778.0
-margin_top = 632.0
-margin_right = 942.0
+margin_left = 797.0
+margin_top = 672.0
+margin_right = 922.0
 margin_bottom = 880.0
 size_flags_horizontal = 6
 size_flags_vertical = 10
 custom_constants/separation = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 164.0
-margin_bottom = 248.0
+margin_right = 125.0
+margin_bottom = 208.0
 custom_constants/separation = 20
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 164.0
-margin_bottom = 47.0
+margin_right = 125.0
+margin_bottom = 37.0
 text = "New Start"
 
 [node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 67.0
-margin_right = 164.0
-margin_bottom = 114.0
+margin_top = 57.0
+margin_right = 125.0
+margin_bottom = 94.0
 text = "Continue"
 
 [node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 134.0
-margin_right = 164.0
-margin_bottom = 181.0
+margin_top = 114.0
+margin_right = 125.0
+margin_bottom = 151.0
 text = "Levels"
 
 [node name="Button4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 201.0
-margin_right = 164.0
-margin_bottom = 248.0
+margin_top = 171.0
+margin_right = 125.0
+margin_bottom = 208.0
 text = "Quit"
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 1 )]

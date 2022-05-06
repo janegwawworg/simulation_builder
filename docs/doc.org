@@ -1,0 +1,1 @@
+* touchscreen button: white plane, black word, size 160x80px
