@@ -4,7 +4,7 @@ onready var button1 := $MarginContainer/VBoxContainer/VBoxContainer/HBoxContaine
 onready var button2 := $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Button2
 onready var button3 := $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Button3
 onready var button4 := $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Button4
-
+onready var _world := preload("res://Systems/Simulation.tscn")
 
 
 func _ready() -> void:
@@ -15,7 +15,8 @@ func _ready() -> void:
 
 
 func _go_to_level(value: String) -> void:
-	get_tree().change_scene("res://Systems/Simulation.tscn")
+	get_tree().change_scene_to(_world)
+	Library.current_level = value
 
 
 func _on_Button9_pressed():

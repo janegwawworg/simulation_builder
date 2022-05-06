@@ -12,7 +12,7 @@ onready var _next_level_scene := $CanvasLayer/NextLevel
 func _ready() -> void:
 	$Timer.start(simulation_speed)
 	Events.connect("to_next_level", self, "_next_level")
-	_start_level()
+	start_level(Library.current_level)
 
 
 func _process(delta) -> void:
@@ -33,8 +33,8 @@ func _next_level(value: String) -> void:
 	_game_world.add_child(_level)
 
 
-func _start_level() -> void:
-	Library.current_level = "level1"
+func start_level(value) -> void:
+	Library.current_level = value
 	call_deferred("_next_level", Library.current_level)
 
 
