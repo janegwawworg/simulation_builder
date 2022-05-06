@@ -6,13 +6,17 @@ onready var _gui := $CanvasLayer/GUI
 onready var _work_system := WorkSystem.new()
 onready var _game_world := $GameWorld
 onready var _level := $GameWorld/Level1
-onready var _next_level := $CanvasLayer/NextLevel
+onready var _next_level_scene := $CanvasLayer/NextLevel
 
 
 func _ready() -> void:
 	$Timer.start(simulation_speed)
 	Events.connect("to_next_level", self, "_next_level")
 	_start_level()
+
+
+func _process(delta) -> void:
+	_count_children()
 
 
 # includes "level1" to "level4"
@@ -36,3 +40,8 @@ func _start_level() -> void:
 
 func _on_Timer_timeout() -> void:
 	Events.emit_signal("systems_ticked", simulation_speed)
+
+
+func _count_children() -> void:
+	if _level.get_child(2).get_child(0).get_child_count() <= 2:
+		_next_level_scene.toggle_show_button(true)
