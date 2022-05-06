@@ -5,9 +5,12 @@
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 script = ExtResource( 2 )
+background = ExtResource( 1 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+position = Vector2( -4880, -4153 )
+scale = Vector2( 6.30469, 7.78889 )
 texture = ExtResource( 1 )
 centered = false
